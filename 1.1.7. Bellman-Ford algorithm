@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <limits.h>
+
+#define MAXV 1001
+#define INF LLONG_MAX
+
+struct Edge {
+    int u, v, w;
+};
+
+struct Edge edges[100000];
+int parent[MAXV];
+
+int main(void) {
+    int V, E, source;
+    scanf("%d", &V);
+    scanf("%d", &E);
+
+    for (int i = 0; i < E; i++) {
+        scanf("%d %d %d",
+              &edges[i].u, &edges[i].v, &edges[i].w);
+    }
+
+    scanf("%d", &source);
+
+    long long dist[MAXV];
+
+    for (int i = 1; i <= V; i++) {
+        dist[i] = INF;
+        parent[i] = -1;
+    }
+
+    dist[source] = 0;
+
+    for (int i = 1; i < V; i++) {
+        int changed = 0;
+}
