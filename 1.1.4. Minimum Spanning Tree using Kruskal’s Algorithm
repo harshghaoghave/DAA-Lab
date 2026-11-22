@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+
+
+void kruskalMST(int **cost, int V) {
+    int edges_u[V * V], edges_v[V * V], edges_w[V * V];
+    int edgeCount = 0, i, j, temp;
+
+    for (i = 0; i < V; i++)
+        for (j = i + 1; j < V; j++)
+            if (cost[i][j] != 9999) {
+                edges_u[edgeCount] = i;
+                edges_v[edgeCount] = j;
+                edges_w[edgeCount] = cost[i][j];
+                edgeCount++;
+            }
+
+    for (i = 0; i < edgeCount - 1; i++)
+        for (j = i + 1; j < edgeCount; j++)
+            if (edges_w[j] < edges_w[i] ||
+                (edges_w[j] == edges_w[i] &&
+                 (edges_u[j] < edges_u[i] ||
+                  (edges_u[j] == edges_u[i] && edges_v[j] < edges_v[i])))) {
+                temp = edges_u[i]; edges_u[i] = edges_u[j]; edges_u[j] = temp;
+                temp = edges_v[i]; edges_v[i] = edges_v[j]; edges_v[j] = temp;
+                temp = edges_w[i]; edges_w[i] = edges_w[j]; edges_w[j] = temp;
+            }
+
+    int parent[V];
+    for (i = 0; i < V; i++) parent[i] = i;
+
+    int totalCost = 0, edgeNum = 0;
+
+    for (i = 0; i < edgeCount && edgeNum < V - 1; i++) {
+}
